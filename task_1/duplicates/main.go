@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 /*
  You are given an array of n+1 integers 1 through n. In addition there is a single duplicate integer.
 
@@ -11,9 +15,17 @@ package main
 */
 
 func getDuplicate(numbers []int) int {
-	panic("Implement me!")
+	sum := 0
+	numbersLen := len(numbers)
+
+	for i := 0; i < numbersLen; i++ {
+		sum += numbers[i]
+	}
+
+	return sum - (((numbersLen - 1) * numbersLen) / 2)
 }
 
 func main() {
-
+	fmt.Println(getDuplicate([]int{3, 2, 5, 1, 3, 4}))
+	fmt.Println(getDuplicate([]int{2, 1, 5, 4, 3, 5}))
 }
