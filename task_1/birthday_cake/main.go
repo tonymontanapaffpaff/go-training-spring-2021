@@ -14,10 +14,11 @@ import "fmt"
 */
 
 func cake(x int, y string) string {
-	var totalCandles = int32(x / 100 * 70)
-	var fallCandles rune
-
-	var currentInd int
+	var (
+		totalCandles = int32(x / 100 * 70)
+		fallCandles  rune
+		currentInd   int
+	)
 
 	for i, value := range y {
 		currentInd = i + 1

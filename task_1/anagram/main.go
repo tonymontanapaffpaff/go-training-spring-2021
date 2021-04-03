@@ -18,7 +18,6 @@ import (
 */
 
 func isAnagram(test, original string) bool {
-
 	sortStr := func(s string) string {
 		strArr := strings.Split(strings.ToLower(s), "")
 		sort.Strings(strArr)

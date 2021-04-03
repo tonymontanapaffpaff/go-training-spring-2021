@@ -8,9 +8,7 @@ import "fmt"
 */
 
 func evenOrOdd(number int) string {
-	if number == 0 {
-		return "not even/odd value"
-	} else if number%2 == 0 {
+	if number&1 == 0 {
 		return "Even"
 	} else {
 		return "Odd"
