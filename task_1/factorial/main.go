@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 	In mathematics, the factorial of a non-negative integer n, denoted by n!,
  	is the product of all positive integers less than or equal to n.
@@ -10,9 +12,20 @@ package main
 */
 
 func factorial(n int) int {
-	panic("Implement me!")
+	result := 1
+
+	if n == 0 {
+		return result
+	}
+
+	for i := 1; i <= n; i++ {
+		result *= i
+	}
+
+	return result
 }
 
 func main() {
-
+	fmt.Println(factorial(5))
+	fmt.Println(factorial(0))
 }
