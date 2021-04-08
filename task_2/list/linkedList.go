@@ -13,6 +13,8 @@ type Interface interface {
 	Display()
 	Search(index int) (interface{}, error)
 	Delete(index int) (interface{}, error)
+	Iterator() (func() (interface{}, bool), bool)
+	Size() int
 	Sort()
 	SortWithComparator(c utils.Comparator)
 }
@@ -127,6 +129,10 @@ func (l *linkedList) Search(index int) (interface{}, error) {
 	return l.getElement(index).value, nil
 }
 
+func (l *linkedList) Size() int {
+	return l.length
+}
+
 // Sort sorts the element into ascending sequence using ReverseSort since the elements are inserted at the beginning
 func (l *linkedList) Sort() {
 	if l.size() < 2 {
@@ -173,7 +179,7 @@ func (l *linkedList) values() []interface{} {
 
 	values := make([]interface{}, l.size(), l.size())
 
-	it, hasNext := l.iterator()
+	it, hasNext := l.Iterator()
 	var v interface{}
 	index := 0
 	for hasNext {
@@ -185,8 +191,8 @@ func (l *linkedList) values() []interface{} {
 	return values
 }
 
-// iterator returns an iterator over the elements.
-func (l *linkedList) iterator() (func() (interface{}, bool), bool) {
+// Iterator returns an iterator over the elements.
+func (l *linkedList) Iterator() (func() (interface{}, bool), bool) {
 	e := l.head
 
 	return func() (interface{}, bool) {
