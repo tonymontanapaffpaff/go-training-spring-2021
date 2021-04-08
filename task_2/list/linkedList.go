@@ -1,8 +1,9 @@
-package main
+package linkedList
 
 import (
 	"errors"
 	"fmt"
+
 	"github.com/go-training-spring-2021/task_2/utils"
 )
 

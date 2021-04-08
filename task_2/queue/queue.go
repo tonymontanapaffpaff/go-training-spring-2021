@@ -1,7 +1,8 @@
-package main
+package queue
 
 import (
 	"errors"
+
 	"github.com/go-training-spring-2021/task_2/utils"
 )
 
