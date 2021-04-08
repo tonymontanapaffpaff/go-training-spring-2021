@@ -12,6 +12,8 @@ type Interface interface {
 	IsEmpty() bool
 	IsFull() bool
 	Peek() (interface{}, error)
+	Length() int
+	Capacity() int
 	Sort()
 	SortWithComparator(c utils.Comparator)
 }
@@ -87,7 +89,15 @@ func (q *Queue) IsEmpty() bool {
 
 // IsFull checks if the queue is full
 func (q *Queue) IsFull() bool {
-	return q.count == len(q.buffer)
+	return q.Length() == q.Capacity()
+}
+
+func (q *Queue) Length() int {
+	return q.count
+}
+
+func (q *Queue) Capacity() int {
+	return len(q.buffer)
 }
 
 // Sort sorts the element into ascending sequence
