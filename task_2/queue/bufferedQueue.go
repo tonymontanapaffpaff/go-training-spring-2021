@@ -6,8 +6,8 @@ import (
 	"github.com/go-training-spring-2021/task_2/utils"
 )
 
-// Interface is a type of Queue.
-type Interface interface {
+// Queue is a type of BufferedQueue.
+type Queue interface {
 	Enqueue(elem interface{})
 	Dequeue() (interface{}, error)
 	IsEmpty() bool
@@ -19,14 +19,14 @@ type Interface interface {
 	SortWithComparator(c utils.Comparator)
 }
 
-// Queue represents a single instance of the queue data structure.
-type Queue struct {
+// BufferedQueue represents a single instance of the queue data structure.
+type BufferedQueue struct {
 	buffer            []interface{}
 	head, tail, count int
 }
 
-// New initializes and returns an Queue.
-func New(n int) Interface {
+// New initializes and returns an BufferedQueue.
+func New(n int) Queue {
 	// 16 is the smallest capacity that queue may have
 	size := 16
 
@@ -35,13 +35,13 @@ func New(n int) Interface {
 		size = n
 	}
 
-	return &Queue{
+	return &BufferedQueue{
 		buffer: make([]interface{}, size),
 	}
 }
 
 // Enqueue adds an element to the end of the queue.
-func (q *Queue) Enqueue(elem interface{}) {
+func (q *BufferedQueue) Enqueue(elem interface{}) {
 	if q.IsFull() {
 		q.resize()
 	}
@@ -54,7 +54,7 @@ func (q *Queue) Enqueue(elem interface{}) {
 }
 
 // Dequeue removes an element from the front of the queue.
-func (q *Queue) Dequeue() (interface{}, error) {
+func (q *BufferedQueue) Dequeue() (interface{}, error) {
 	if q.IsEmpty() {
 		return nil, errors.New("empty queue")
 	}
@@ -75,7 +75,7 @@ func (q *Queue) Dequeue() (interface{}, error) {
 }
 
 // Peek gets the value of the front of the queue without removing it
-func (q *Queue) Peek() (interface{}, error) {
+func (q *BufferedQueue) Peek() (interface{}, error) {
 	if q.IsEmpty() {
 		return nil, errors.New("empty queue")
 	}
@@ -84,25 +84,25 @@ func (q *Queue) Peek() (interface{}, error) {
 }
 
 // IsEmpty checks if the queue is empty
-func (q *Queue) IsEmpty() bool {
+func (q *BufferedQueue) IsEmpty() bool {
 	return q.count == 0
 }
 
 // IsFull checks if the queue is full
-func (q *Queue) IsFull() bool {
+func (q *BufferedQueue) IsFull() bool {
 	return q.Length() == q.Capacity()
 }
 
-func (q *Queue) Length() int {
+func (q *BufferedQueue) Length() int {
 	return q.count
 }
 
-func (q *Queue) Capacity() int {
+func (q *BufferedQueue) Capacity() int {
 	return len(q.buffer)
 }
 
 // Sort sorts the element into ascending sequence
-func (q *Queue) Sort() {
+func (q *BufferedQueue) Sort() {
 	if q.count < 2 {
 		return
 	}
@@ -111,7 +111,7 @@ func (q *Queue) Sort() {
 }
 
 // SortWithComparator used when it is necessary to sort a list of structs
-func (q *Queue) SortWithComparator(c utils.Comparator) {
+func (q *BufferedQueue) SortWithComparator(c utils.Comparator) {
 	if q.count < 2 {
 		return
 	}
@@ -121,7 +121,7 @@ func (q *Queue) SortWithComparator(c utils.Comparator) {
 
 // resize resizes the queue to fit exactly twice its current contents
 // this can result in shrinking if the queue is less than half-full
-func (q *Queue) resize() {
+func (q *BufferedQueue) resize() {
 	newBuf := make([]interface{}, q.count<<1)
 
 	if q.tail > q.head {

@@ -7,8 +7,8 @@ import (
 	"github.com/go-training-spring-2021/task_2/utils"
 )
 
-// Interface is a type of LinkedList.
-type Interface interface {
+// List is a type of LinkedList.
+type List interface {
 	Insert(values ...interface{})
 	Deletion() (interface{}, error)
 	Display()
@@ -32,7 +32,7 @@ type linkedList struct {
 }
 
 // New initializes and returns an LinkedList.
-func New() Interface {
+func New() List {
 	return &linkedList{
 		head:   nil,
 		length: 0,

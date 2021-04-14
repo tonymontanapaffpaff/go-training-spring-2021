@@ -38,7 +38,7 @@ func TestLinkedListSize(t *testing.T) {
 	}
 }
 
-func getLinkedListLength(ll Interface) int {
+func getLinkedListLength(ll List) int {
 	length := 0
 	it, hasNext := ll.Iterator()
 	for hasNext {
